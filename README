@@ -1,0 +1,81 @@
+Orbitz Vending Machine Coding Test
+
+author:
+Eric Hansen 
+emhansen@gmail.com
+414-324-0415
+
+====Overview===
+An implementation of a service that can act as a vending machine.  This application
+has authentication, uses a greedy algorithm to determine change, was created 
+using test driven development, and was built using Maven. 
+
+This project uses junit 4 for its tests.  
+
+I added security to the stock product method so that only maintenance workers 
+can stock the vending machine.  I used Spring Security and the JSR 250 api for
+that functionality.  
+
+This project is built with the Java 6 jdk, and must be since it uses the 
+@Override annotation on methods that implement their interface's methods.  
+
+I used a greedy algorithm to determine the optimal (minimal amount of coins) to 
+return for the coin return method.  This is okay in the US since that algorithm 
+works for nickels, dimes, and quarters.
+
+I used synchronized keywords on all the services methods (except checkStock) and 
+a ConcurrentMap to keep track of the remaining stock, which is returned as 
+unmodifiable by the checkStock method.  This approach ensures that only one 
+thread will be changing the VendingMachineImpl's data structures at any moment.
+It also guarantees that any client will have the most up to date view of the stock.  
+For concurrency concerns in an enterprise solution (or a solution that requires 
+persistence) I would typically rely on a database and JTA .  I thought that approach 
+too heavy for such a simple problem and relied on in memory data structures instead. 
+
+
+
+====Run Tests====
+If you have maven installed simply type in this directory:
+mvn test
+
+You should see output that says:
+Results :
+
+Tests run: 27, Failures: 0, Errors: 0, Skipped: 0
+
+
+
+====Install Maven====
+Since the instructions stated to include only the source code
+I didn't bundle the required libraries.  I recommend installing
+maven to build this project since it will download the
+correct versions of all necessary libraries for you.
+
+Download Maven:
+http://maven.apache.org/download.html
+
+Extract it somewhere and add Maven's bin directory to your environment PATH
+
+Ensure JAVA_HOME environment variable is pointing to a JDK 1.6
+
+Configure a HTTP Proxy if you're behind one:
+http://maven.apache.org/guides/mini/guide-proxies.html
+
+Browse back to the directory this README is in and type:
+mvn test
+
+It will start the build, download all dependencies, and then run the tests.
+
+You should see output that says:
+Results :
+
+Tests run: 27, Failures: 0, Errors: 0, Skipped: 0
+ 
+
+
+====Problems==== 
+If Maven is having problems, email me and I can send over the libraries.
+
+
+
+ 
